@@ -6,9 +6,17 @@ default deny_root_user = false
 default deny_sudo = false
 default deny_caching = false
 default deny_add = false
+default check_multistage = false
 # default deny_image_expansion = false
 
 
+# Check Multistage Dockerfile
+check_multistage {
+    cmd := input[i].cmd
+	cmd == "from"
+	c := count(cmd)
+	c > 1
+}
 
 untrusted_base_image {
     input[i].cmd == "from"
@@ -43,6 +51,11 @@ deny_caching{
 # Ensure that COPY is used instead of ADD CIS 4.9
 deny_add{
     input[i].cmd != "add"
+}
+
+# Check Multistage Dockerfile
+check_multistage{
+
 }
 
 # Ensure ADD does not include unpack archives or download files 
