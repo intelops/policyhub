@@ -53,11 +53,6 @@ deny_add{
     input[i].cmd != "add"
 }
 
-# Check Multistage Dockerfile
-check_multistage{
-
-}
-
 # Ensure ADD does not include unpack archives or download files 
 # deny_image_expansion{
 # 	input[_].cmd == "add"
