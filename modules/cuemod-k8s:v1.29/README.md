@@ -1,2 +1,2 @@
-# Using this workspace for generating and validating Kubernetes manidests for different types of resources
+# Use this workspace for generating and validating Kubernetes manifests for different types of resources
 
