@@ -29,4 +29,4 @@ jobs:
           genval artifact push --reqinput ./default-policies/rego/docker_policies \
           --dest ghcr.io/intelops/genval-security-policies/dockerfile-policies:v0.0.1 \
           --annotations="authors=intelops Inc."
-          --creds=$GITHUB_TOKEN
+          --creds=${{ secrets.GITHUB_TOKEN }}
