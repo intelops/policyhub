@@ -1,3 +1,0 @@
-# TODO
-- Add Rego policy for checking if a Dockefile has ENTRYPOINT instruction
-- Add Rego policy to Check and Secrets or sensitive data in Dockerfile ARG,RUN COPY instructions
