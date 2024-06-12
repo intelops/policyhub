@@ -1,0 +1,40 @@
+name: ci
+on:
+  push:
+    branches:
+    - main
+    paths:
+    - genval/default-policies/rego/terraform_policies
+
+permissions:
+  contents: write
+  security-events: write
+  # Optional: allow read access to pull request. Use with `only-new-issues` option.
+  packages: write
+
+jobs:
+  push-artifact:
+    name: CI
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v3
+      - uses: actions/setup-go@v4
+        with:
+          go-version: '1.22'
+          cache: false
+
+      - name: inetall genval
+        run: go install github.com/intelops/genval@latest
+            
+      - name: Login to Github Container Registry
+        uses: docker/login-action@v2
+        with:
+          registry: ghcr.io
+          username: ${{ github.actor }}
+          password: ${{ secrets.GITHUB_TOKEN }}    
+
+      - name: push-rego-policies
+        run: |
+          genval artifact push --reqinput ./default-policies/rego/terraform_policies \
+          --dest ghcr.io/intelops/policyhub/genval/terraform_policies:v0.0.1 \
+          --annotations="authors=intelops Inc."
