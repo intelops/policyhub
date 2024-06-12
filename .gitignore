@@ -1,4 +1,3 @@
 .todo
 modules/go.*
-genval
 Dockerfile*
