@@ -4,8 +4,6 @@ import rego.v1
 
 deny_priviliged_pod contains msg if {
 	input.kind == "Deployment"
-	podSpec := input.spec.template.spec.securityContext
-
-	not podSpec.priviliged
+	not input.spec.template.spec.securityContext
     msg:= "Deployment does not use priviliged pod"
 }
