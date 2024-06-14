@@ -35,6 +35,6 @@ jobs:
 
       - name: push-rego-policies
         run: |
-          genval artifact push --reqinput ./genval/default-policies/rego/infrafile_policies/k8s/ \
+          genval artifact push --reqinput ./genval/defaultpolicies/rego/infrafile_policies/k8s/ \
           --dest ghcr.io/intelops/policyhub/genval/infrafile_policies:v0.0.1 \
           --annotations="authors=intelops Inc."
