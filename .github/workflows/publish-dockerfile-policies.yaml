@@ -35,6 +35,6 @@ jobs:
 
       - name: push-rego-policies
         run: |
-          genval artifact push --reqinput ./default-policies/rego/docker_policies \
+          genval artifact push --reqinput ./genval/defaultpolicies/rego/dockerfile_policies \
           --dest ghcr.io/intelops/policyhub/genval/dockerfile-policies:v0.0.1 \
           --annotations="authors=intelops Inc."
