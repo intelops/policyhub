@@ -1,6 +1,7 @@
 # Genval workspace for managing Kubernertes configuration files
 
-This directory structure contains a bare bone workspace for users to generate and validate Kubernetes manifesdts.
+
+This directory structure serves as a foundational workspace for generating and validating Kubernetes manifests.
 
 ```shell
 .
@@ -10,6 +11,6 @@ This directory structure contains a bare bone workspace for users to generate an
 └── README.md
 ```
 
-The `input` directory is a placeholder directory for housing all the manifests a user wants to generate from or validate against certain **Cuelang** policies. This is the directory that needs to be supplied to the `genval cue` commands `--reqinput` flag.
+- `input` Directory: This directory is designated for storing all manifests that users intend to generate from or validate against specific Cuelang policies. When using the `genval cue` command, this directory should be specified with the `--reqinput` flag.
 
-The `policy` directory is a placeholder directory for manintaining **Cuelang** definitions — policies in Genval's terms. This is the directory that needs to be provided to the `--policy` flag of `genval cue` command.
+- `policy` Directory: This directory is reserved for maintaining **Cuelang** definitions, referred to as policies in the context of Genval. When executing the `genval cue` command, this directory should be provided with the `--policy` flag.
