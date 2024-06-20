@@ -4,7 +4,7 @@ on:
     branches:
     - main
     paths:
-    - genval/default-policies/rego/input_policies/**
+    - genval/defaultpolicies/rego/input_policies/**
 
 permissions:
   contents: write

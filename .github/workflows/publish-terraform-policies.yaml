@@ -4,7 +4,7 @@ on:
     branches:
     - main
     paths:
-    - genval/default-policies/rego/terraform_policies/**
+    - genval/defaultpolicies/rego/terraform_policies/**
 
 permissions:
   contents: write

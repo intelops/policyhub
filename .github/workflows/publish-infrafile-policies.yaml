@@ -4,7 +4,7 @@ on:
     branches:
     - main
     paths:
-    - genval/default-policies/rego/infrafile_policies/**
+    - genval/defaultpolicies/rego/infrafile_policies/**
 
 permissions:
   contents: write
