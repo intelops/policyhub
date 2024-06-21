@@ -23,7 +23,7 @@ jobs:
           go-version: '1.22'
           cache: false
 
-      - name: inetall genval
+      - name: install genval
         run: go install github.com/intelops/genval@latest
             
       - name: Login to Github Container Registry
