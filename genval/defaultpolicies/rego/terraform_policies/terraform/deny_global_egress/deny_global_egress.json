@@ -1,5 +1,5 @@
 {
-  "name": "DenyGlobalIngress",
+  "name": "DenyGlobalEgress",
   "policy_file": "deny_global_egress.rego",
   "policy_name": "deny_global_egress",
   "severity": "High",
