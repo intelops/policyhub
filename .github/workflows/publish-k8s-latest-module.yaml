@@ -36,5 +36,5 @@ jobs:
       - name: push-rego-policies
         run: |
           genval artifact push --reqinput ./genval/modules/cuemod-k8s:v1.30 \
-          --dest ghcr.io/intelops/policyhub/genval/k8s-cuemods:v0.0.1 \
+          --dest oci://ghcr.io/intelops/policyhub/genval/k8s-cuemods:v0.0.1 \
           --annotations="authors=intelops Inc."
