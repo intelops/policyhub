@@ -3,7 +3,7 @@ package validate_input_tf
 import rego.v1
 
 
-deny_global_ingress contains msg if {
+deny_global_egress contains msg if {
 	input.resource[_].aws_security_group
 	eg := input.resource[_].aws_security_group.allow_tls.egress[_]
 	denied_cidr := "0.0.0.0/0"
