@@ -48,4 +48,5 @@ jobs:
           echo "artifact URL="oci://ghcr.io/intelops/policyhub/genval/argocd-cuemods:${GIT_TAG}" >> $GITHUB_ENV
 
       - name: Use artifact URL
-        echo "Artifact URL is: ${{ env.artifact_url }}"
+        run: |
+          echo "Artifact URL is: ${{ env.artifact_url }}"
