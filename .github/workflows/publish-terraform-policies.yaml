@@ -35,6 +35,6 @@ jobs:
 
       - name: push-rego-policies
         run: |
-          genval artifact push --reqinput ./genval/defaultpolicies/rego/terraform_policies/terraform \
+          genval artifact push --reqinput ./genval/defaultpolicies/rego/terraform_policies/ \
           --dest oci://ghcr.io/intelops/policyhub/genval/terraform_policies:v0.0.1 \
           --annotations="authors=intelops Inc."
