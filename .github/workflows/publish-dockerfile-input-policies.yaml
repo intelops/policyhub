@@ -1,10 +1,10 @@
 name: ci
 on:
   push:
-    branches:
-    - main
+    tags:
+      - 'v*'
     paths:
-    - genval/defaultpolicies/rego/input_policies/**
+      - genval/defaultpolicies/rego/input_policies/**
 
 permissions:
   contents: write
@@ -33,8 +33,20 @@ jobs:
           username: ${{ github.actor }}
           password: ${{ secrets.GITHUB_TOKEN }}    
 
+
+      - name: Fetch Git tag
+        id: get_tag
+        run: echo "tag=$(git describe --tags --abbrev=0)" >> $GITHUB_ENV
+
       - name: push-rego-policies
         run: |
-          genval artifact push --reqinput ./genval/defaultpolicies/rego/input_policies \
+          GIT_TAG=${{ env.tag }}
+          GENVAL_OUTPUT=(genval artifact push --reqinput ./genval/defaultpolicies/rego/input_policies \
           --dest oci://ghcr.io/intelops/policyhub/genval/input_policies:v0.0.1 \
-          --annotations="authors=intelops Inc."
+          --annotations="authors=intelops Inc.")
+          echo "${GENVAL_OUTPUT}" 
+          echo "artifact URL="oci://ghcr.io/intelops/policyhub/genval/input_policies:${GIT_TAG}" >> ${GITHUB_ENV}
+        
+      - name: Use artifact URL
+        run: |
+          echo "Artifact URL is: ${{ env.artifact_url }}"
