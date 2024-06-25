@@ -3,7 +3,7 @@
 
 This directory structure serves as a foundational workspace for generating and validating ArgoCD manifests.
 
-
+```markdown
 ├── input
 ├── policy
 └── README.md

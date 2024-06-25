@@ -4,7 +4,7 @@ on:
     tags:
       - 'v*'
     paths:
-      - genval/modules/cuemod-argocd*/**
+      - 'genval/modules/cuemod-argocd*/**'
 
 permissions:
   contents: write
