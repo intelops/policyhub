@@ -4,7 +4,7 @@ on:
     branches:
     - main
     paths:
-    - genval/defaultpolicies/rego/input_policies/**
+    - genval/modules/cuemod-tektoncd*/**
 
 permissions:
   contents: write
@@ -23,7 +23,7 @@ jobs:
           go-version: '1.22'
           cache: false
 
-      - name: install genval
+      - name: inetall genval
         run: go install github.com/intelops/genval@main
             
       - name: Login to Github Container Registry
@@ -35,6 +35,6 @@ jobs:
 
       - name: push-rego-policies
         run: |
-          genval artifact push --reqinput ./genval/defaultpolicies/rego/input_policies \
-          --dest oci://ghcr.io/intelops/policyhub/genval/input_policies:v0.0.1 \
+          genval artifact push --reqinput ./genval/modules/cuemod-tektoncd:v0.60.2 \
+          --dest oci://ghcr.io/intelops/policyhub/genval/tektoncd-cuemods:v0.0.1 \
           --annotations="authors=intelops Inc."

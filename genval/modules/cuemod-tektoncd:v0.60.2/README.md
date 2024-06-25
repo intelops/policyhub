@@ -1,7 +1,7 @@
-# Genval workspace for managing Kubernertes configuration files
+# Genval workspace for managing TektonCD configuration files
 
 
-This directory structure serves as a foundational workspace for generating and validating Kubernetes manifests.
+This directory structure serves as a foundational workspace for generating and validating TektonCD manifests.
 
 ```shell
 .
