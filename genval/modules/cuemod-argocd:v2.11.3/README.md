@@ -1,4 +1,4 @@
-# Genval workspace for managing Kubernertes configuration files
+# Genval workspace for managing ArgoCD configuration files
 
 
 This directory structure serves as a foundational workspace for generating and validating ArgoCD manifests.
