@@ -45,7 +45,7 @@ jobs:
           --dest oci://ghcr.io/intelops/policyhub/genval/argocd-cuemods:${GIT_TAG} \
           --annotations="authors=intelops Inc.")
           echo "${GENVAL_OUTPUT}"
-          echo "artifact URL="oci://ghcr.io/intelops/policyhub/genval/argocd-cuemods:${GIT_TAG}" >> ${GITHUB_ENV}
+          echo "artifact URL=oci://ghcr.io/intelops/policyhub/genval/argocd-cuemods:${GIT_TAG}" >> ${GITHUB_ENV}
         
 
       - name: Use artifact URL
