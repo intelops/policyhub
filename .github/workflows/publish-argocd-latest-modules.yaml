@@ -2,7 +2,7 @@ name: ci
 on:
   push:
     tags:
-      - 'v*'
+    - 'v*'
     paths:
     - genval/modules/cuemod-argocd*/**
 
