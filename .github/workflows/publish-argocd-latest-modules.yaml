@@ -1,8 +1,8 @@
 name: ci
 on:
   push:
-    branches:
-    - auto-tagging
+    tags:
+      - 'v*'
     paths:
     - genval/modules/cuemod-argocd*/**
 
