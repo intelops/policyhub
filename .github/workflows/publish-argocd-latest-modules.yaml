@@ -41,11 +41,12 @@ jobs:
         id: push_policies
         run: |
           GIT_TAG=${{ env.tag }}
-          GENVAL_OUTPUT = $(genval artifact push --reqinput ./genval/modules/cuemod-argocd:v2.11.3 \
+          GENVAL_OUTPUT=$(genval artifact push --reqinput ./genval/modules/cuemod-argocd:v2.11.3 \
           --dest oci://ghcr.io/intelops/policyhub/genval/argocd-cuemods:${GIT_TAG} \
           --annotations="authors=intelops Inc.")
           echo "${GENVAL_OUTPUT}"
-          echo "artifact URL="oci://ghcr.io/intelops/policyhub/genval/argocd-cuemods:${GIT_TAG}" >> $GITHUB_ENV
+          echo "artifact URL="oci://ghcr.io/intelops/policyhub/genval/argocd-cuemods:${GIT_TAG}" >> ${GITHUB_ENV}
+        
 
       - name: Use artifact URL
         run: |
