@@ -1,16 +1,16 @@
 name: dockerfile-input-ci
 on:
   push:
-    tags:
-      - 'branches'
+    branches:
+    - main
     paths:
       - 'genval/genval/deaultpolicies/rego/input_policies/**'
     tags:
       - 'v*'
     if: |
-      (startswith(github.ref, 'refd/tags/'') &&
-      "github.ref == 'ref/head/main'" &&
-      "contains(github.event.head_commit.modified, genval/defaultpolicies/rego/input_policies/**)")
+      (startswith(github.ref, 'refs/tags/')) &&
+      (github.ref == 'refs/head/main') &&
+      contains(github.event.head_commit.modified, 'genval/defaultpolicies/rego/input_policies/**')
 
 permissions:
   contents: write

@@ -1,16 +1,16 @@
 name: dockerfile-ci
 on:
   push:
-    tags:
-      - 'branches'
+    branches:
+        - main
     paths:
       - 'genval/defaultpolicies/rego/dockerfile_policies/**'
     tags:
       - 'v*'
     if: |
-      (startswith(github.ref, 'refd/tags/'') &&
-      "github.ref == 'refs/head/master'" &&
-      "contains(github.event.head_commit.modified, 'genval/defaultpolicies/rego/dockerfile_policies/**')")
+      (startswith(github.ref, 'refs/tags/')) &&
+      github.ref == 'refs/head/master' &&
+      "contains(github.event.head_commit.modified, 'genval/defaultpolicies/rego/dockerfile_policies/**')
 
 permissions:
   contents: write

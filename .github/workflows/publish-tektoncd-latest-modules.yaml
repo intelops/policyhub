@@ -1,16 +1,16 @@
 name: Tekton-modules-CI
 on:
   push:
-    tags:
-      - 'branches'
+    branches:
+      - main
     paths:
       - 'genval/modules/cuemod-tektoncd:v0.60.2/**'
     tags:
       - 'v*'
     if: |
-      (startswith(github.ref, 'refd/tags/'') &&
-      "github.ref == 'ref/head/main'" &&
-      "contains(github.event.head_commit.modified, 'genval/modules/cuemod-tektoncd:v0.60.2/**')")
+      (startswith(github.ref, 'refs/tags/')) &&
+      github.ref == 'refs/head/main' &&
+      contains(github.event.head_commit.modified, 'genval/modules/cuemod-tektoncd:v0.60.2/**')
 
 permissions:
   contents: write

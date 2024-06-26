@@ -1,16 +1,16 @@
 name: Infrafile-ci
 on:
   push:
-    tags:
-      - 'branches'
+    branches:
+      - main
     paths:
       - 'genval/defaultpolicies/rego/infrafile_policies/**'
     tags:
       - 'v*'
     if: |
-      (startswith(github.ref, 'refd/tags/'') &&
-      "github.ref == 'ref/head/main'" &&
-      "contains(github.event.head_commit.modified, genval/defaultpolicies/rego/infrafile_policies/**)")
+      (startswith(github.ref, 'refs/tags/')) &&
+      github.ref == 'refs/head/main' &&
+      contains(github.event.head_commit.modified, 'genval/defaultpolicies/rego/infrafile_policies/**')
 
 permissions:
   contents: write

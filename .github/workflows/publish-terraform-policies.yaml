@@ -8,9 +8,9 @@ on:
     tags:
       - 'v*'
     if: |
-      (startswith(github.ref, 'refd/tags/'') &&
-      "github.ref == 'refs/heads/master'" &&
-      "contains(github.event.head_commit.modified, 'genval/defaultpolicies/rego/terraform_policies/**')")
+      (startswith(github.ref, 'refs/tags/') &&
+      github.ref == 'refs/heads/master' &&
+      contains(github.event.head_commit.modified, 'genval/defaultpolicies/rego/terraform_policies/**')
 
 permissions:
   contents: write

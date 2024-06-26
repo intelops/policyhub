@@ -1,16 +1,16 @@
 name: K8s-modules-ci
 on:
   push:
-    tags:
-      - 'branches'
+    branches:
+      - main
     paths:
       - 'genval/modules/cuemod-k8s:v1.30/**'
     tags:
       - 'v*'
     if: |
-      (startswith(github.ref, 'refd/tags/'') &&
-      "github.ref == 'ref/head/main'" &&
-      "contains(github.event.head_commit.modified, genval/modules/cuemod-k8s:v1.30/**)")
+      (startswith(github.ref, 'refs/tags/')) &&
+      github.ref == 'refs/head/main' &&
+      contains(github.event.head_commit.modified, 'genval/modules/cuemod-k8s:v1.30/**')
 
 permissions:
   contents: write
