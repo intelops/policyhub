@@ -1,15 +1,21 @@
-name: ci
+name: Tekton-modules-CI
 on:
   push:
-    branches:
-    - main
+    tags:
+      - 'branches'
     paths:
-    - genval/modules/cuemod-tektoncd*/**
+      - 'genval/modules/cuemod-tektoncd:v0.60.2/**'
+    tags:
+      - 'v*'
+    if: |
+      (startswith(github.ref, 'refd/tags/'') &&
+      "github.ref == 'ref/head/main'" &&
+      "contains(github.event.head_commit.modified, 'genval/modules/cuemod-tektoncd:v0.60.2/**')")
 
 permissions:
   contents: write
   security-events: write
-  # Optional: allow read access to pull request. Use with `only-new-issues` option.
+  # Optional: allow read access to pull request. Use with `only-new.
   packages: write
 
 jobs:
