@@ -49,7 +49,7 @@ jobs:
           echo "${GENVAL_OUTPUT}"
           echo "dockerfile_artifact_url=oci://ghcr.io/intelops/policyhub/genval/dockerfile_policies:${GIT_TAG}" >> $GITHUB_ENV
 
-      - name: Use Dockerfile URL
+      - name: Use Dockerfile Policies URL
         run: |
           echo "Dockerfile artifact URL: ${{ env.dockerfile_artifact_url }}"
 
@@ -64,9 +64,9 @@ jobs:
           echo "${GENVAL_OUTPUT}"
           echo "dockerfile_input_artifact_url=oci://ghcr.io/intelops/policyhub/genval/dockerfile_input_policies:${GIT_TAG}" >> $GITHUB_ENV
 
-      - name: Use Dockerfile Input URL
+      - name: Use Dockerfile Input policies URL
         run: |
-          echo "Dockerfile artifact URL: ${{ env.dockerfile_input_artifact_url }}"
+          echo Input Policies artifact URL: ${{ env.dockerfile_input_artifact_url }}"
  
       - name: Push Infrafile policies
         id: push_infrafile_policies
@@ -79,9 +79,9 @@ jobs:
           echo "${GENVAL_OUTPUT}"
           echo "infrafile_artifact_url=oci://ghcr.io/intelops/policyhub/genval/infrafile_policies:${GIT_TAG}" >> $GITHUB_ENV
 
-      - name: Use Dockerfile Input URL
+      - name: Use Infrafile Policies artifact URL
         run: |
-          echo "Dockerfile artifact URL: ${{ env.infrafile_artifact_url }}"
+          echo "Infrafile policies artifact URL: ${{ env.infrafile_artifact_url }}"
 
       - name: Push Terraform policies
         id: push_terraform_policies
@@ -94,9 +94,9 @@ jobs:
           echo "${GENVAL_OUTPUT}"
           echo "terraform_artifact_url=oci://ghcr.io/intelops/policyhub/genval/terraform_policies:${GIT_TAG}" >> $GITHUB_ENV
 
-      - name: Use Dockerfile Input URL
+      - name: Use Terraform Policies artifact URL
         run: |
-          echo "Dockerfile artifact URL: ${{ env.terraform_artifact_url }}"
+          echo "Terraform Policies artifact URL: ${{ env.terraform_artifact_url }}"
 
 # Publish Genval cuemods
         
@@ -111,9 +111,9 @@ jobs:
           echo "${GENVAL_OUTPUT}"
           echo "k8s-module_artifact_url=oci://ghcr.io/intelops/policyhub/genval/k8s-cuemods:${GIT_TAG}" >> $GITHUB_ENV
 
-      - name: Use Dockerfile Input URL
+      - name: Use K8s module artifact URL
         run: |
-          echo "Dockerfile artifact URL: ${{ env.k8s_module_artifact_url }}"
+          echo "K8s module artifact URL: ${{ env.k8s_module_artifact_url }}"
 
       - name: Push ArgoCD module
         id: push_argocd_module
@@ -124,11 +124,11 @@ jobs:
           --dest oci://ghcr.io/intelops/policyhub/genval/argocd-cuemods:$GIT_TAG} \
           --annotations="authors=intelops Inc."
           echo "${GENVAL_OUTPUT}"
-          echo "argocd_module_artifact_url=oci://ghcr.io/intelops/policyhub/genval/argocd-cuemods:$GIT_TAG}" >> $GITHUB_ENV
+          echo "argocd_module_artifact_url=oci://ghcr.io/intelops/policyhub/genval/argocd-cuemods:${GIT_TAG}" >> $GITHUB_ENV
 
-      - name: Use Dockerfile Input URL
+      - name: Use ArgoCD module artifact URL
         run: |
-          echo "Dockerfile artifact URL: ${{ env.argocd_module_artifact_url }}"
+          echo "ArgoCD module artifact URL: ${{ env.argocd_module_artifact_url }}"
 
       - name: Push TektonCD module
         id: push_tektoncd_module
@@ -139,8 +139,8 @@ jobs:
           --dest oci://ghcr.io/intelops/policyhub/genval/argocd-cuemods:$GIT_TAG} \
           --annotations="authors=intelops Inc."
           echo "${GENVAL_OUTPUT}"
-          echo "tektoncd_module_artifact_url=oci://ghcr.io/intelops/policyhub/genval/tektoncd-cuemods:$GIT_TAG}" >> $GITHUB_ENV
+          echo "tektoncd_module_artifact_url=oci://ghcr.io/intelops/policyhub/genval/tektoncd-cuemods:${GIT_TAG}" >> $GITHUB_ENV
 
-      - name: Use Dockerfile Input URL
+      - name: Use TektonCD module artifact URL
         run: |
-          echo "Dockerfile artifact URL: ${{ env.tektoncd_module_artifact_url }}"
+          echo "TektonCD module artifact URL: ${{ env.tektoncd_module_artifact_url }}"
