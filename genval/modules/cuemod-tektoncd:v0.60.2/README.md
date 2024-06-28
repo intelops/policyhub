@@ -1,7 +1,7 @@
 # Genval workspace for managing TektonCD configuration files
 
 
-This directory structure serves as a foundational workspace for generating and validating TektonCD manifests.
+This directory structure serves as a foundational workspace for generating and validating TektonCD manifests using Genval's `cue` command.
 
 ```shell
 .
