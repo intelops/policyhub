@@ -28,7 +28,7 @@ jobs:
       - name: Fetch Initial version
         id: init_version
         run: |
-          ./.github/workflows/get_version.sh
+          ./.github/versions/argocd_mod_version.env
 
       - name: Set Init-Version
         id: set_init_version
@@ -57,7 +57,7 @@ jobs:
       - name: Write policy URL
         uses: "DamianReeves/write-file-action@master"
         with:
-          path: genval/modules/cuemod-argocd*/newversion.env
+          path: genval/modules/outputs/ARGOCD_CUEMODS.env
           write-mode: overwrite
           contents: |
             # GitHub generated file

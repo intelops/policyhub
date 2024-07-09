@@ -57,7 +57,7 @@ jobs:
       - name: Write policy URL
         uses: "DamianReeves/write-file-action@master"
         with:
-          path: genval/modules/cuemod-tektoncd*/newversion.env
+          path: genval/modules/outputs/TEKTONCD_MODULES.env
           write-mode: overwrite
           contents: |
             # GitHub generated file

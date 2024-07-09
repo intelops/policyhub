@@ -56,7 +56,7 @@ jobs:
       - name: Write policy URL
         uses: "DamianReeves/write-file-action@master"
         with:
-          path: genval/modules/cuemods-k8s*/newversion.env
+          path: genval/modules/outputs/K8S_CUEMODS.env
           write-mode: overwrite
           contents: |
             # GitHub generated file

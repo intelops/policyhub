@@ -57,7 +57,7 @@ jobs:
       - name: Write policy URL
         uses: "DamianReeves/write-file-action@master"
         with:
-          path: dockerfile_policies/newversion.env
+          path: genval/modules/outputs/INPUT_POLICIES.env
           write-mode: overwrite
           contents: |
             # GitHub generated file
