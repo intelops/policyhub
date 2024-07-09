@@ -1,10 +1,10 @@
-name: ci
+name: Release TentonCD modules
 on:
   push:
     branches:
-    - main
+      - main
     paths:
-    - genval/modules/cuemod-tektoncd*/**
+      - genval/modules/cuemod-tektoncd*/**
 
 permissions:
   contents: write
@@ -13,28 +13,61 @@ permissions:
   packages: write
 
 jobs:
-  push-artifact:
-    name: CI
+  push-artifacts:
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v3
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: "0"
+
       - uses: actions/setup-go@v4
         with:
-          go-version: '1.22'
+          go-version: "1.22"
           cache: false
 
-      - name: inetall genval
+      - name: Fetch Initial version
+        id: init_version
+        run: |
+          ./.github/workflows/get_version.sh
+
+      - name: Set Init-Version
+        id: set_init_version
+        run: echo "tag=${{ steps.init_version.outputs.new_version }}" >> $GITHUB_ENV
+
+      - name: Install genval
         run: go install github.com/intelops/genval@main
-            
-      - name: Login to Github Container Registry
+
+      - name: Login to GitHub Container Registry
         uses: docker/login-action@v2
         with:
           registry: ghcr.io
           username: ${{ github.actor }}
-          password: ${{ secrets.GITHUB_TOKEN }}    
+          password: ${{ secrets.GITHUB_TOKEN }}
 
-      - name: push-rego-policies
+      - name: Push TektonCD modules
+        id: push_policies
         run: |
-          genval artifact push --reqinput ./genval/modules/cuemod-tektoncd:v0.60.2 \
-          --dest oci://ghcr.io/intelops/policyhub/genval/tektoncd-cuemods:v0.0.1 \
-          --annotations="authors=intelops Inc."
+          GIT_TAG=${{ env.tag }}
+          GENVAL_OUTPUT=$(genval artifact push --reqinput ./genval/modules/cuemod-tektoncd:v0.60.2/ \
+          --dest oci://ghcr.io/intelops/policyhub/genval/tektoncd-cuemods:${GIT_TAG}  \
+          --annotations="authors=Intelops inc.")
+          echo "${GENVAL_OUTPUT}"
+          echo "TEKTONCD_MODULES=oci://ghcr.io/intelops/policyhub/genval/dockerfile_policies:${GIT_TAG} >> $GITHUB_ENV
+
+      - name: Write policy URL
+        uses: "DamianReeves/write-file-action@master"
+        with:
+          path: genval/modules/cuemod-tektoncd*/newversion.env
+          write-mode: overwrite
+          contents: |
+            # GitHub generated file
+            # Please do not modify or delete this file
+            ${{ env.TEKTONCD_MODULES }}
+
+      - name: Commit & Push
+        uses: Andro999b/push@v1.3
+        with:
+          github_token: ${{ secrets.GITHUB_TOKEN }}
+          branch: main
+          force: true
+          message: "Overwritten by Github Actions - ${date}"
