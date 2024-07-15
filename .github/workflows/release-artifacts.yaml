@@ -107,7 +107,7 @@ jobs:
           --dest oci://ghcr.io/intelops/policyhub/genval/${{ matrix.policy.artifact-name }}:${GIT_TAG} \
           --annotations="authors=intelops inc.")
           echo "${GENVAL_OUTPUT}"
-          echo "${{ matrix.policy.output }}=oci://ghcr.io/intelops/policyhub/genval/${{ matrix.policy.artifact-name }}:${GIT_TAG}" >> $GITHUB_ENV
+          echo "OUTPUT=oci://ghcr.io/intelops/policyhub/genval/${{ matrix.policy.artifact-name }}:${GIT_TAG}" >> $GITHUB_ENV
 
       # Write OCI URL to output file
       - name: Write policy URL
@@ -119,7 +119,7 @@ jobs:
           contents: |
             # GitHub generated file
             # Please do not modify or delete this file
-            ${{ env[matrix.policy.output] }}
+            ${{ matrix.policy.output}}=${{ env.OUTPUT }}
 
       - name: Commit & Push
         if: steps.changes.outputs.src == 'true'
