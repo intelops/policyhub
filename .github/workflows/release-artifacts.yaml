@@ -126,6 +126,15 @@ jobs:
         uses: Andro999b/push@v1.3
         with:
           github_token: ${{ secrets.GITHUB_TOKEN }}
-          branch: main
+          branch: "${{ matrix.policy.name}}-${{ github.run_number }}"
           force: true
           message: "Overwritten by GitHub Actions - ${{ github.run_number }}"
+      - name: Create Pull Request
+        if: steps.changes.outputs.src == 'true'
+        uses: peter-evans/create-pull-request@v5
+        with:
+          token: ${{ secrets.GITHUB_TOKEN }}
+          branch: "${{ matrix.policy.name}}-${{ github.run_number }}"
+          title: "Update policy URL for ${{ matrix.policy.name }}"
+          body: "This pull request updates the policy URL for ${{ matrix.policy.name }}."
+          base: main
