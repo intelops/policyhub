@@ -60,7 +60,7 @@ jobs:
             artifact-name: argoCD_module
             output: ARGOCD_MODULE
     steps:
-      - uses: actions/checkout@v4
+      - uses: actions/checkout@692973e3d937129bcbf40652eb9f2f61becf3332 # v4
         with:
           fetch-depth: "0"
       - name: Set matrix output
@@ -73,7 +73,7 @@ jobs:
 
       - name: Path filter
         id: changes
-        uses: dorny/paths-filter@v3
+        uses: dorny/paths-filter@de90cc6fb38fc0963ad72b210f1f284cd68cea36 # v3
         with:
           base: main
           filters: |
@@ -81,7 +81,7 @@ jobs:
               - '${{ matrix.policy.path }}'
 
       - name: setup Go
-        uses: actions/setup-go@v5
+        uses: actions/setup-go@0a12ed9d6a96ab950c8f026ed9f722fe0da7ef32 # v5
         with:
           go-version: "1.22"
       - name: Conditionally set tag and install genval
@@ -92,7 +92,7 @@ jobs:
 
       - name: Login to GitHub Container Registry
         if: steps.changes.outputs.src == 'true'
-        uses: docker/login-action@v2
+        uses: docker/login-action@#0d4c9c5ea7693da7b068278f7b52bda2a190a446 #v3.2.0
         with:
           registry: ghcr.io
           username: ${{ github.actor }}
@@ -112,7 +112,7 @@ jobs:
       # Write OCI URL to output file
       - name: Write policy URL
         if: steps.changes.outputs.src == 'true'
-        uses: DamianReeves/write-file-action@master
+        uses: DamianReeves/write-file-action@6929a9a6d1807689191dcc8bbe62b54d70a32b42 # v1.3
         with:
           path: "genval/outputs/${{ matrix.policy.output }}.env"
           write-mode: overwrite
@@ -123,7 +123,7 @@ jobs:
 
       - name: Commit & Push
         if: steps.changes.outputs.src == 'true'
-        uses: Andro999b/push@v1.3
+        uses: Andro999b/push@c77535fe7a94645f7ceca83e48e6cc977620710e # v1.3
         with:
           github_token: ${{ secrets.GITHUB_TOKEN }}
           branch: "${{ matrix.policy.name}}-${{ github.run_number }}"
@@ -131,7 +131,7 @@ jobs:
           message: "Overwritten by GitHub Actions - ${{ github.run_number }}"
       - name: Create Pull Request
         if: steps.changes.outputs.src == 'true'
-        uses: peter-evans/create-pull-request@v5
+        uses: peter-evans/create-pull-request@c5a7806660adbe173f04e3e038b0ccdcd758773c # v6.1.0
         with:
           token: ${{ secrets.GITHUB_TOKEN }}
           branch: "${{ matrix.policy.name}}-${{ github.run_number }}"
