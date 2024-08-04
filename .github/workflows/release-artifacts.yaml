@@ -120,31 +120,31 @@ jobs:
           echo "OUTPUT=oci://ghcr.io/intelops/policyhub/genval/${{ matrix.policy.artifact-name }}:${GIT_TAG}" >> $GITHUB_ENV
 
       # Write OCI URL to output file
-      - name: Write policy URL
-        if: steps.changes.outputs.src == 'true'
-        uses: DamianReeves/write-file-action@6929a9a6d1807689191dcc8bbe62b54d70a32b42 # v1.3
-        with:
-          path: "genval/outputs/${{ matrix.policy.output }}.env"
-          write-mode: overwrite
-          contents: |
-            # GitHub generated file
-            # Please do not modify or delete this file
-            ${{ matrix.policy.output}}=${{ env.OUTPUT }}
-
-      - name: Commit & Push
-        if: steps.changes.outputs.src == 'true'
-        uses: Andro999b/push@c77535fe7a94645f7ceca83e48e6cc977620710e # v1.3
-        with:
-          github_token: ${{ secrets.GITHUB_TOKEN }}
-          branch: "${{ matrix.policy.name}}-${{ github.run_number }}"
-          force: true
-          message: "Overwritten by GitHub Actions - ${{ github.run_number }}"
-      - name: Create Pull Request
-        if: steps.changes.outputs.src == 'true'
-        uses: peter-evans/create-pull-request@c5a7806660adbe173f04e3e038b0ccdcd758773c # v6.1.0
-        with:
-          token: ${{ secrets.GITHUB_TOKEN }}
-          branch: "${{ matrix.policy.name}}-${{ github.run_number }}"
-          title: "Update policy URL for ${{ matrix.policy.name }}"
-          body: "This pull request updates the policy URL for ${{ matrix.policy.name }}."
-          base: main
+      # - name: Write policy URL
+      #   if: steps.changes.outputs.src == 'true'
+      #   uses: DamianReeves/write-file-action@6929a9a6d1807689191dcc8bbe62b54d70a32b42 # v1.3
+      #   with:
+      #     path: "genval/outputs/${{ matrix.policy.output }}.env"
+      #     write-mode: overwrite
+      #     contents: |
+      #       # GitHub generated file
+      #       # Please do not modify or delete this file
+      #       ${{ matrix.policy.output}}=${{ env.OUTPUT }}
+      #
+      # - name: Commit & Push
+      #   if: steps.changes.outputs.src == 'true'
+      #   uses: Andro999b/push@c77535fe7a94645f7ceca83e48e6cc977620710e # v1.3
+      #   with:
+      #     github_token: ${{ secrets.GITHUB_TOKEN }}
+      #     branch: "${{ matrix.policy.name}}-${{ github.run_number }}"
+      #     force: true
+      #     message: "Overwritten by GitHub Actions - ${{ github.run_number }}"
+      # - name: Create Pull Request
+      #   if: steps.changes.outputs.src == 'true'
+      #   uses: peter-evans/create-pull-request@c5a7806660adbe173f04e3e038b0ccdcd758773c # v6.1.0
+      #   with:
+      #     token: ${{ secrets.GITHUB_TOKEN }}
+      #     branch: "${{ matrix.policy.name}}-${{ github.run_number }}"
+      #     title: "Update policy URL for ${{ matrix.policy.name }}"
+      #     body: "This pull request updates the policy URL for ${{ matrix.policy.name }}."
+      #     base: main
