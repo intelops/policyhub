@@ -52,19 +52,19 @@ jobs:
             path: genval/modules/cuemod-k8s*/**
             source: genval/modules/cuemod-k8s*/
             version-file: ./.github/versions/k8s_mod_version.env
-            artifact-name: k8s-module
+            artifact-name: k8s-cuemods
             output: K8S_MODULE
           - name: tektonCD_module
             path: genval/modules/cuemod-tektoncd*/
             source: genval/modules/cuemod-tektoncd*/
             version-file: ./.github/versions/tektoncd_mod_version.env
-            artifact-name: tektonCD_module
+            artifact-name: tektonCD_cuemods
             output: TEKTONCD_MODULE
           - name: argoCD_module
             path: genval/modules/cuemod-argocd*/
             source: genval/modules/cuemod-argocd:v2.11.3/**
             version-file: ./.github/versions/argocd_mod_version.env
-            artifact-name: argoCD_module
+            artifact-name: argoCD_cuemods
             output: ARGOCD_MODULE
     steps:
       - uses: actions/checkout@692973e3d937129bcbf40652eb9f2f61becf3332 # v4
