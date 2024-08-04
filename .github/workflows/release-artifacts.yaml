@@ -17,7 +17,7 @@ permissions:
   contents: write
   id-token: write
   packages: write
-  pull_requests: write
+  pull-requests: write
 
 jobs:
   check-updates:
