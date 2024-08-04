@@ -1,11 +1,9 @@
 # Genval workspace for managing Kubernertes configuration files
 
-
 This directory structure serves as a foundational workspace for generating and validating Kubernetes manifests.
 
 ```shell
 .
-├── cue.mod
 ├── input
 ├── policy
 └── README.md
