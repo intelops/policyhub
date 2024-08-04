@@ -87,7 +87,7 @@ jobs:
       - name: Conditionally set tag
         if: steps.changes.outputs.src == 'true'
         run: |
-          echo "tag=$(./.github/workflows/get_version.sh ./.github/versions/${{ matrix.policy.version-file }})" >> $GITHUB_ENV
+          echo "tag=$(./.github/get_version.sh ./.github/versions/${{ matrix.policy.version-file }})" >> $GITHUB_ENV
       - name: Install genval
         if: steps.changes.outputs.src == 'true'
         run: |
