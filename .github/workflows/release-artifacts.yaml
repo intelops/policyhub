@@ -26,36 +26,43 @@ jobs:
         policy:
           - name: dockerfile_policies
             path: genval/defaultpolicies/rego/dockerfile_policies/**
+            source: genval/defaultpolicies/rego/dockerfile_policies/
             version-file: ./.github/versions/dockerfile_version.env
             artifact-name: dockerfile_policies
             output: DOCKERFILE_POLICIES
           - name: terraform_policies
             path: genval/defaultpolicies/rego/terraform_policies/**
+            source: genval/defaultpolicies/rego/terraform_policies/
             version-file: ./.github/versions/terraform_version.env
             artifact-name: terraform_policies
             output: TERRAFORM_POLICIES
           - name: input_policies
             path: genval/defaultpolicies/rego/input_policies/**
+            source: genval/defaultpolicies/rego/input_policies/
             version-file: ./.github/versions/input_version.env
             artifact-name: terraform_policies
             output: INPUT_POLICIES
           - name: infrafile_policies
             path: genval/defaultpolicies/rego/infrafile_policies/**
+            source: genval/defaultpolicies/rego/infrafile_policies/
             version-file: ./.github/versions/infrafile_version.env
             artifact-name: infrafile_policies
             output: INFRAFILE_POLICIES
           - name: k8s-module
             path: genval/modules/cuemod-k8s*/**
+            source: genval/modules/cuemod-k8s:v1.30/
             version-file: ./.github/versions/k8s_mod_version.env
             artifact-name: k8s-module
             output: K8s_MODULE
           - name: tektonCD_module
             path: genval/modules/cuemod-tektoncd*/**
+            source: genval/modules/cuemod-tektoncd*/**
             version-file: ./.github/versions/tektoncd_mod_version.env
             artifact-name: tektonCD_module
             output: TEKTONCD_MODULE
           - name: argoCD_module
             path: genval/modules/cuemod-argocd*/**
+            source: genval/modules/cuemod-argocd:v2.11.3/**
             version-file: ./.github/versions/argocd_mod_version.env
             artifact-name: argoCD_module
             output: ARGOCD_MODULE
@@ -106,7 +113,7 @@ jobs:
         id: push_policies
         run: |
           GIT_TAG=${{ env.tag }}
-          GENVAL_OUTPUT=$(genval artifact push --reqinput ${{ matrix.policy.path }} \
+          GENVAL_OUTPUT=$(genval artifact push --reqinput ${{ matrix.policy.source }} \
           --dest oci://ghcr.io/intelops/policyhub/genval/${{ matrix.policy.artifact-name }}:${GIT_TAG} \
           --annotations="authors=intelops inc.")
           echo "${GENVAL_OUTPUT}"
