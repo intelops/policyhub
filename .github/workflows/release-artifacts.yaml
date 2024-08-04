@@ -53,7 +53,7 @@ jobs:
             source: genval/modules/cuemod-k8s*/
             version-file: ./.github/versions/k8s_mod_version.env
             artifact-name: k8s-module
-            output: K8s_MODULE
+            output: K8S_MODULE
           - name: tektonCD_module
             path: genval/modules/cuemod-tektoncd*/
             source: genval/modules/cuemod-tektoncd*/
