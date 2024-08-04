@@ -84,12 +84,14 @@ jobs:
         uses: actions/setup-go@0a12ed9d6a96ab950c8f026ed9f722fe0da7ef32 # v5
         with:
           go-version: "1.22"
-      - name: Conditionally set tag and install genval
+      - name: Conditionally set tag
         if: steps.changes.outputs.src == 'true'
         run: |
           echo "tag=$(./.github/workflows/get_version.sh ./.github/versions/${{ matrix.policy.version-file }})" >> $GITHUB_ENV
-            go install github.com/intelops/genval@main
-
+      - name: Install genval
+        if: steps.changes.outputs.src == 'true'
+        run: |
+          go install github.com/intelops/genval@main
       - name: Login to GitHub Container Registry
         if: steps.changes.outputs.src == 'true'
         uses: docker/login-action@v3.3.0
